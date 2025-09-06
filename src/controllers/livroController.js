@@ -3,8 +3,22 @@ import livro from "../models/Livro.js";
 
 class LivroController {
     static async listarLivros (req, res) {
-        const listaLivros = await livro.find({});
-        res.status(200).json(listaLivros);
+        try{
+            const listaLivros = await livro.find({});
+            res.status(200).json(listaLivros);
+        } catch (error) {
+            res.status(500).json({message: `${error.message} - falha ao listar livros.`})
+        }
+    };
+
+    static async listarLivroPorId (req, res) {
+        try{
+            const id = req.params.id;
+            const LivroEncontrado = await livro.findById(id);
+            res.status(200).json(livroEncontrado);
+        } catch (error) {
+            res.status(500).json({message: `${error.message} - falha ao listar livros.`})
+        }
     };
 
     static async cadastrarLivro (req, res) {
