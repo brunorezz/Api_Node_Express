@@ -14,7 +14,7 @@ class LivroController {
     static async listarLivroPorId (req, res) {
         try{
             const id = req.params.id;
-            const LivroEncontrado = await livro.findById(id);
+            const livroEncontrado = await livro.findById(id);
             res.status(200).json(livroEncontrado);
         } catch (error) {
             res.status(500).json({message: `${error.message} - falha ao listar livro por ID.`})
